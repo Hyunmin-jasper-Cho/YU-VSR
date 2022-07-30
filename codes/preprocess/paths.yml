@@ -1,13 +1,19 @@
 df2k:
   tdsr:
-    source: '../../ntire20/Corrupted-tr-x'
-    target: '../../ntire20/Corrupted-tr-y'
+    source: '../ntire20/YUV/Corrupted-tr-x_small'
+    target: '../ntire20/YUV/Corrupted-tr-y_y'
     valid:
 dped:
   clean:
     hr:
       train: '../../ntire20/DPEDiphone-tr-x'
       valid: '../../ntire20/DPEDiphone-va'
+yuv_y: # for create yuv dataset...
+  onec: # one channel
+    source: '../ntire20/YUV/Corrupted-tr-x_small'
+    target: '../ntire20/YUV/Corrupted-tr-y_y'
+    valid: 
 datasets:
   df2k: '../datasets/DF2K'
   dped: '../datasets/DPED'
+  yuv_y: '../datasets/YUV/Y'

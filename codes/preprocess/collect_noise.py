@@ -15,7 +15,7 @@ opt = parser.parse_args()
 
 # define input and target directories
 with open('./preprocess/paths.yml', 'r') as stream:
-    PATHS = yaml.load(stream)
+    PATHS = yaml.safe_load(stream)
 
 
 def noise_patch(rgb_img, sp, max_var, min_mean):
@@ -46,6 +46,14 @@ if __name__ == '__main__':
         sp = 256
         max_var = 20
         min_mean = 0
+    elif opt.dataset == 'yuv_y':
+        # img_dir: source which contain noise. 
+        img_dir = PATHS[opt.dataset][opt.artifacts]['source']
+        # noise_dir: noise which extracted from source img. 
+        noise_dir = PATHS['datasets']['yuv_y'] + '/Corrupted_noise'
+        sp = 256
+        max_var = 20
+        min_mean = 0
     else:
         img_dir = PATHS[opt.dataset][opt.artifacts]['hr']['train']
         noise_dir = PATHS['datasets']['dped'] + '/DPEDiphone_noise'
@@ -53,6 +61,7 @@ if __name__ == '__main__':
         max_var = 20
         min_mean = 50
 
+    # There SHOULD NOT BE EXIST the noise path. 
     assert not os.path.exists(noise_dir)
     os.mkdir(noise_dir)
 
